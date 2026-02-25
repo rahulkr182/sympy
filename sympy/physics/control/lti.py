@@ -1458,16 +1458,19 @@ class TransferFunctionBase(SISOLinearTimeInvariant, ABC):
         den_coeffs = den_poly.all_coeffs()
 
         if n == 0:
+            # For constant TransferFunction (n=0), the StateSpace representation
+            # should have no states (empty A, B, C matrices) and a D matrix
+            # containing the constant value.
             return (
-                Matrix([zeros(1)]),
-                Matrix([zeros(1)]),
-                Matrix([zeros(1)]),
-                Matrix([num_coeffs[0] / den_coeffs[0]]),
+                Matrix(0, 0, []),            # A: 0x0
+                Matrix(0, 1, []),            # B: 0x1
+                Matrix(1, 0, []),            # C: 1x0
+                Matrix([num_coeffs[0] / den_coeffs[0]]),  # D: 1x1
             )
 
         if self.num == self.den:
             return (
-                Matrix([zeros(1)]), Matrix([zeros(1)]), Matrix([zeros(1)]), Matrix([1])
+                Matrix(0, 0, []), Matrix(0, 1, []), Matrix(1, 0, []), Matrix([1])
             )
 
         diff = n - num_poly.degree()
