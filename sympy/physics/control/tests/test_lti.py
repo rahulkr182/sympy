@@ -25,7 +25,7 @@ from sympy.physics.control.lti import (
     TransferFunctionMatrix, MIMOSeries, MIMOParallel, MIMOFeedback, StateSpace,
     DiscreteStateSpace, create_state_space, gbt, bilinear, forward_diff,
     backward_diff, phase_margin, gain_margin)
-from sympy.testing.pytest import raises, XFAIL
+from sympy.testing.pytest import raises
 from sympy.logic.boolalg import false, true
 
 from math import isclose
